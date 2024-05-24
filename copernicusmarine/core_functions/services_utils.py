@@ -336,6 +336,9 @@ def get_retrieval_service(
             )
             raise syntax_error
         suffix_path = ""
+    logger.info(f"Dataset ID: {dataset_id}")
+    logger.info(f"Service type: {force_service_type}")
+    logger.info(f"suffix path: {suffix_path}")
 
     return _get_retrieval_service_from_dataset_id(
         catalogue=catalogue,
@@ -378,6 +381,7 @@ def _get_retrieval_service_from_dataset_id(
             "--contains <search_token>' to find datasets"
         ),
     )
+    logger.info(f"Dataset name: {dataset.dataset_name}")
     return _get_retrieval_service_from_dataset(
         dataset=dataset,
         suffix_path=suffix_path,

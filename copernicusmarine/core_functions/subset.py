@@ -19,9 +19,7 @@ from copernicusmarine.core_functions.credentials_utils import (
 )
 from copernicusmarine.core_functions.models import SubsetMethod
 from copernicusmarine.core_functions.services_utils import (
-    CommandType,
     RetrievalService,
-    get_retrieval_service,
     parse_dataset_id_and_service_and_suffix_path_from_url,
 )
 from copernicusmarine.core_functions.utils import (
@@ -188,21 +186,34 @@ def subset_function(
     if overwrite_output_data:
         subset_request.overwrite_output_data = overwrite_output_data
 
-    catalogue = parse_catalogue(
-        no_metadata_cache=no_metadata_cache,
-        disable_progress_bar=disable_progress_bar,
-        staging=staging,
+    # catalogue = parse_catalogue(
+    #     no_metadata_cache=no_metadata_cache,
+    #     disable_progress_bar=disable_progress_bar,
+    #     staging=staging,
+    # )
+
+    retrieval_service = RetrievalService(
+        dataset_id="cmems_mod_arc_phy_anfc_6km_detided_P1D-m",
+        service_type=CopernicusMarineDatasetServiceType.TIMESERIES,
+        service_format=CopernicusMarineServiceFormat.ZARR,
+        uri=(
+            "https://s3.waw3-1.cloudferro.com/mdl-arco-geo-008/arco/"
+            "ARCTIC_ANALYSISFORECAST_PHY_002_001/"
+            "cmems_mod_arc_phy_anfc_6km_detided_P1D-m_202311/geoChunked.zarr"
+        ),
+        dataset_valid_start_date=1625443200000,
     )
-    retrieval_service: RetrievalService = get_retrieval_service(
-        catalogue,
-        subset_request.dataset_id,
-        subset_request.dataset_url,
-        subset_request.force_dataset_version,
-        subset_request.force_dataset_part,
-        subset_request.force_service,
-        CommandType.SUBSET,
-        dataset_subset=subset_request.get_time_and_geographical_subset(),
-    )
+    # retrieval_service: RetrievalService = get_retrieval_service(
+    #     catalogue,
+    #     subset_request.dataset_id,
+    #     subset_request.dataset_url,
+    #     subset_request.force_dataset_version,
+    #     subset_request.force_dataset_part,
+    #     subset_request.force_service,
+    #     CommandType.SUBSET,
+    #     dataset_subset=subset_request.get_time_and_geographical_subset(),
+    # )
+    logger.info(retrieval_service)
     subset_request.dataset_url = retrieval_service.uri
     check_dataset_subset_bounds(
         username=username,

@@ -4,7 +4,9 @@ import os
 import pathlib
 from typing import List, Optional
 
-from copernicusmarine.catalogue_parser.catalogue_parser import parse_catalogue
+from copernicusmarine.catalogue_parser.catalogue_parser import (
+    CopernicusMarineDatasetServiceType,
+)
 from copernicusmarine.catalogue_parser.request_structure import (
     GetRequest,
     filter_to_regex,
@@ -14,11 +16,7 @@ from copernicusmarine.catalogue_parser.request_structure import (
 from copernicusmarine.core_functions.credentials_utils import (
     get_and_check_username_password,
 )
-from copernicusmarine.core_functions.services_utils import (
-    CommandType,
-    RetrievalService,
-    get_retrieval_service,
-)
+from copernicusmarine.core_functions.services_utils import RetrievalService
 from copernicusmarine.core_functions.utils import (
     create_cache_directory,
     delete_cache_folder,
@@ -164,22 +162,34 @@ def _run_get_request(
         no_metadata_cache=no_metadata_cache,
     )
 
-    catalogue = parse_catalogue(
-        no_metadata_cache=no_metadata_cache,
-        disable_progress_bar=disable_progress_bar,
-        staging=staging,
+    # catalogue = parse_catalogue(
+    #     no_metadata_cache=no_metadata_cache,
+    #     disable_progress_bar=disable_progress_bar,
+    #     staging=staging,
+    # )
+    retrieval_service = RetrievalService(
+        dataset_id="cmems_mod_arc_phy_anfc_6km_detided_P1D-m",
+        service_type=CopernicusMarineDatasetServiceType.FILES,
+        service_format=None,
+        uri=(
+            "https://s3.waw3-1.cloudferro.com/mdl-native-10/native"
+            "/ARCTIC_ANALYSISFORECAST_PHY_002_001/"
+            "cmems_mod_arc_phy_anfc_6km_detided_P1D-m_202311"
+        ),
+        dataset_valid_start_date=None,
     )
-    retrieval_service: RetrievalService = get_retrieval_service(
-        catalogue,
-        get_request.dataset_id,
-        get_request.dataset_url,
-        get_request.force_dataset_version,
-        get_request.force_dataset_part,
-        get_request.force_service,
-        CommandType.GET,
-        get_request.index_parts,
-        dataset_sync=get_request.sync,
-    )
+    # retrieval_service: RetrievalService = get_retrieval_service(
+    #     catalogue,
+    #     get_request.dataset_id,
+    #     get_request.dataset_url,
+    #     get_request.force_dataset_version,
+    #     get_request.force_dataset_part,
+    #     get_request.force_service,
+    #     CommandType.GET,
+    #     get_request.index_parts,
+    #     dataset_sync=get_request.sync,
+    # )
+    logger.info(f"Retrieval service: {retrieval_service}")
     get_request.dataset_url = retrieval_service.uri
     logger.info(
         "Downloading using service "
