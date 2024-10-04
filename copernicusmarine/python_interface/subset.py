@@ -2,7 +2,6 @@ import pathlib
 from datetime import datetime
 from typing import List, Optional, Union
 
-from copernicusmarine.core_functions import documentation_variables
 from copernicusmarine.core_functions.deprecated import deprecated_python_option
 from copernicusmarine.core_functions.deprecated_options import (
     DEPRECATED_OPTIONS,
@@ -66,11 +65,11 @@ def subset(
     Parameters
     ----------
     dataset_id : str, optional
-        {documentation_variables.SHARED_HELP.DATASET_ID_HELP}
+        the unie
     dataset_version : str, optional
-        {documentation_variables.SHARED_HELP.DATASET_VERSION_HELP}
+        the unique
     dataset_part : str, optional
-        {documentation_variables.SHARED_HELP.DATASET_PART_HELP}
+        the uniqeu
     username : str, optional
         The username for authentication. See also :func:`~copernicusmarine.login`.
     password : str, optional
