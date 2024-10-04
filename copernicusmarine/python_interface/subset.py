@@ -2,6 +2,7 @@ import pathlib
 from datetime import datetime
 from typing import List, Optional, Union
 
+from copernicusmarine.core_functions import documentation_variables
 from copernicusmarine.core_functions.deprecated import deprecated_python_option
 from copernicusmarine.core_functions.deprecated_options import (
     DEPRECATED_OPTIONS,
@@ -21,7 +22,10 @@ from copernicusmarine.python_interface.exception_handler import (
 )
 from copernicusmarine.python_interface.utils import homogenize_datetime
 
+Ocean = ["ocean"]
 
+
+@documentation_variables.docstring_parameter(Ocean[0])
 @deprecated_python_option(**DEPRECATED_OPTIONS.dict_old_names_to_new_names)
 @log_exception_and_exit
 def subset(
@@ -59,17 +63,17 @@ def subset(
     netcdf_compression_level: Optional[int] = None,
     netcdf3_compatible: bool = False,
 ) -> ResponseSubset:
-    f"""
+    """
     Extracts a subset of data from a specified dataset using given parameters.
 
     Parameters
     ----------
     dataset_id : str, optional
-        the unie
+        ara d
     dataset_version : str, optional
-        the unique
+        d
     dataset_part : str, optional
-        the uniqeu
+        {0}
     username : str, optional
         The username for authentication. See also :func:`~copernicusmarine.login`.
     password : str, optional
