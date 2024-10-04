@@ -13,6 +13,7 @@ from copernicusmarine.command_line_interface.utils import (
     force_dataset_version_option,
     tqdm_disable_option,
 )
+from copernicusmarine.core_functions import documentation_variables
 from copernicusmarine.core_functions.deprecated import (
     DeprecatedClickOptionsCommand,
 )
@@ -84,7 +85,7 @@ def cli_subset() -> None:
     "-i",
     type=str,
     default=None,
-    help="The datasetID.",
+    help=documentation_variables.SHARED_HELP.DATASET_ID_HELP,
 )
 @force_dataset_version_option
 @force_dataset_part_option
@@ -92,133 +93,93 @@ def cli_subset() -> None:
     "--username",
     type=str,
     default=None,
-    help="If not set, search for environment variable"
-    + " COPERNICUSMARINE_SERVICE_USERNAME"
-    + ", or else look for configuration files, or else ask for user input.",
+    help=documentation_variables.SHARED_HELP.USERNAME_HELP,
 )
 @click.option(
     "--password",
     type=str,
     default=None,
-    help="If not set, search for environment variable"
-    + " COPERNICUSMARINE_SERVICE_PASSWORD"
-    + ", or else look for configuration files, or else ask for user input.",
+    help=documentation_variables.SHARED_HELP.PASSWORD_HELP,
 )
 @click.option(
     "--variable",
     "-v",
     "variables",
     type=str,
-    help="Specify dataset variable. Can be used multiple times.",
+    help=documentation_variables.SUBSET_HELP.VARIABLE_HELP,
     multiple=True,
 )
 @click.option(
     "--minimum-longitude",
     "-x",
     type=float,
-    help=(
-        "Minimum longitude for the subset. "
-        "The value will be reduced to the interval [-180; 360[."
-    ),
+    help=documentation_variables.SUBSET_HELP.MINIMUM_LONGITUDE_HELP,
 )
 @click.option(
     "--maximum-longitude",
     "-X",
     type=float,
-    help=(
-        "Maximum longitude for the subset. "
-        "The value will be reduced to the interval [-180; 360[."
-    ),
+    help=documentation_variables.SUBSET_HELP.MAXIMUM_LONGITUDE_HELP,
 )
 @click.option(
     "--minimum-latitude",
     "-y",
     type=click.FloatRange(min=-90, max=90),
-    help="Minimum latitude for the subset."
-    " Requires a float within this range:",
+    help=documentation_variables.SUBSET_HELP.MINIMUM_LATITUDE_HELP,
 )
 @click.option(
     "--maximum-latitude",
     "-Y",
     type=click.FloatRange(min=-90, max=90),
-    help="Maximum latitude for the subset."
-    " Requires a float within this range:",
+    help=documentation_variables.SUBSET_HELP.MAXIMUM_LATITUDE_HELP,
 )
 @click.option(
     "--minimum-depth",
     "-z",
     type=click.FloatRange(min=0),
-    help="Minimum depth for the subset. Requires a float within this range:",
+    help=documentation_variables.SUBSET_HELP.MINIMUM_DEPTH_HELP,
 )
 @click.option(
     "--maximum-depth",
     "-Z",
     type=click.FloatRange(min=0),
-    help="Maximum depth for the subset. Requires a float within this range:",
+    help=documentation_variables.SUBSET_HELP.MAXIMUM_DEPTH_HELP,
 )
 @click.option(
     "--vertical-dimension-output",
     "-V",
     type=click.Choice(DEFAULT_VERTICAL_DIMENSION_OUTPUTS),
     default=DEFAULT_VERTICAL_DIMENSION_OUTPUT,
-    help=(
-        "Consolidate the vertical dimension (the z-axis) as requested:"
-        " `depth` with descending positive values."
-        " `elevation` with ascending positive values."
-        " Default is `depth`."
-    ),
+    help=documentation_variables.SUBSET_HELP.VERTICAL_DIMENSION_OUTPUT_HELP,
 )
 @click.option(
     "--start-datetime",
     "-t",
     type=str,
-    help="The start datetime of the temporal subset. "
-    "Caution: encapsulate date "
-    + 'with " " to ensure valid expression for format "%Y-%m-%d %H:%M:%S". '
-    + "Supports common format parsed by pendulum. "
-    + "See https://pendulum.eustace.io/docs/#parsing",
+    help=documentation_variables.SUBSET_HELP.START_DATETIME_HELP,
 )
 @click.option(
     "--end-datetime",
     "-T",
     type=str,
-    help="The end datetime of the temporal subset. Caution: encapsulate date "
-    + 'with " " to ensure valid expression for format "%Y-%m-%d %H:%M:%S". '
-    + "Supports common format parsed by pendulum. "
-    + "See https://pendulum.eustace.io/docs/#parsing",
+    help=documentation_variables.SUBSET_HELP.END_DATETIME_HELP,
 )
 @click.option(
     "--coordinates-selection-method",
     type=click.Choice(DEFAULT_COORDINATES_SELECTION_METHODS),
     default=DEFAULT_COORDINATES_SELECTION_METHOD,
-    help=(
-        "The method in which the coordinates will be retrieved."
-        " If 'inside', the retrieved selection will be inside the requested"
-        " interval."
-        " If 'strict-inside', the retrieved selection will be inside the requested"
-        " interval and an error will raise if there doesn't exist the values."
-        " If 'nearest', the returned interval extremes will be the closest to what"
-        " has been asked for. A warning will be displayed if outside of bounds."
-        " If 'outisde', the extremes will be taken to contain all the requested"
-        " interval. A warning will also be displayed if the subset is "
-        "outside of the dataset bounds."
-    ),
+    help=documentation_variables.SUBSET_HELP.COORDINATES_SELECTION_METHOD_HELP,
 )
 @click.option(
     "--output-directory",
     "-o",
     type=click.Path(path_type=pathlib.Path),
-    help="The destination folder for the downloaded files."
-    + " Default is the current directory.",
+    help=documentation_variables.SHARED_HELP.OUTPUT_DIRECTORY_HELP,
 )
 @click.option(
     "--credentials-file",
     type=click.Path(path_type=pathlib.Path),
-    help=(
-        "Path to a credentials file if not in its default directory. "
-        "Accepts .copernicusmarine-credentials / .netrc or _netrc / "
-        "motuclient-python.ini files."
-    ),
+    help=documentation_variables.SHARED_HELP.CREDENTIALS_FILE_HELP,
 )
 @click.option(
     "--output-filename",
