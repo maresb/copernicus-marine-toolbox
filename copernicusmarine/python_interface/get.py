@@ -1,7 +1,7 @@
 import pathlib
 from typing import Optional, Union
 
-from copernicusmarine.core_functions import documentation_utils
+from copernicusmarine.core_functions import decorators, documentation_utils
 from copernicusmarine.core_functions.deprecated import deprecated_python_option
 from copernicusmarine.core_functions.deprecated_options import (
     DEPRECATED_OPTIONS,
@@ -15,7 +15,7 @@ from copernicusmarine.python_interface.exception_handler import (
 
 @deprecated_python_option(**DEPRECATED_OPTIONS.dict_old_names_to_new_names)
 @log_exception_and_exit
-@documentation_utils.docstring_parameter(documentation_utils.GET_HELP)
+@decorators.docstring_parameter(documentation_utils.GET)
 def get(
     dataset_id: Optional[str],
     dataset_version: Optional[str] = None,
@@ -43,7 +43,7 @@ def get(
     staging: bool = False,
 ) -> ResponseGet:
     """
-    Fetches data from the Copernicus Marine server based on the provided parameters.
+    {GET_DESCRIPTION_HELP}
 
     Parameters
     ----------
@@ -96,8 +96,7 @@ def get(
 
     Returns
     -------
-    ResponseGet
-        A list of files that were downloaded and some metadata.
+    {GET_RESPONSE_HELP}
     """  # noqa
     output_directory = (
         pathlib.Path(output_directory) if output_directory else None

@@ -1,7 +1,7 @@
 import json
 from typing import Any
 
-from copernicusmarine.core_functions import documentation_utils
+from copernicusmarine.core_functions import decorators, documentation_utils
 from copernicusmarine.core_functions.deprecated import deprecated_python_option
 from copernicusmarine.core_functions.deprecated_options import (
     DEPRECATED_OPTIONS,
@@ -12,7 +12,7 @@ from copernicusmarine.python_interface.exception_handler import (
 )
 
 
-@documentation_utils.docstring_parameter(documentation_utils.DESCRIBE_HELP)
+@decorators.docstring_parameter(documentation_utils.DESCRIBE)
 @deprecated_python_option(**DEPRECATED_OPTIONS.dict_old_names_to_new_names)
 @log_exception_and_exit
 def describe(
@@ -27,10 +27,7 @@ def describe(
     staging: bool = False,
 ) -> dict[str, Any]:
     """
-    Retrieve metadata information from the Copernicus Marine catalogue.
-
-    This function fetches metadata information from the Copernicus Marine catalogue
-    based on specified parameters and options.
+    {DESCRIBE_DESCRIPTION_HELP}
 
     Parameters
     ----------
@@ -53,8 +50,7 @@ def describe(
 
     Returns
     -------
-    dict[str, Any]
-        A dictionary containing the retrieved metadata information.
+    {DESCRIBE_RESPONSE_HELP}
     """  # noqa
 
     if not isinstance(contains, list):

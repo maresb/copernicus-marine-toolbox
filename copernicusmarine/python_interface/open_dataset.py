@@ -5,7 +5,7 @@ from typing import List, Optional, Union
 import xarray
 
 from copernicusmarine.catalogue_parser.request_structure import LoadRequest
-from copernicusmarine.core_functions import documentation_utils
+from copernicusmarine.core_functions import decorators, documentation_utils
 from copernicusmarine.core_functions.deprecated import deprecated_python_option
 from copernicusmarine.core_functions.deprecated_options import (
     DEPRECATED_OPTIONS,
@@ -35,7 +35,7 @@ from copernicusmarine.python_interface.load_utils import (
 from copernicusmarine.python_interface.utils import homogenize_datetime
 
 
-@documentation_utils.docstring_parameter(documentation_utils.SUBSET_HELP)
+@decorators.docstring_parameter(documentation_utils.SUBSET)
 @deprecated_python_option(**DEPRECATED_OPTIONS.dict_old_names_to_new_names)
 @log_exception_and_exit
 def open_dataset(
@@ -61,10 +61,7 @@ def open_dataset(
     credentials_file: Optional[Union[pathlib.Path, str]] = None,
 ) -> xarray.Dataset:
     """
-    Load an xarray dataset using "lazy-loading" mode from a Copernicus Marine data source using either the ARCO series protocol.
-
-    This means that data is only loaded into memory when a computation is called, optimizing RAM usage by avoiding immediate loading.
-    It supports various parameters for customization, such as specifying geographical bounds, temporal range, depth range, and more.
+    {OPEN_DESCRIPTION_HELP}
 
     Parameters
     ----------
@@ -107,8 +104,7 @@ def open_dataset(
 
     Returns
     -------
-    xarray.Dataset
-        The loaded xarray dataset.
+    {OPEN_RESPONSE_HELP}
     """  # noqa
     start_datetime = homogenize_datetime(start_datetime)
     end_datetime = homogenize_datetime(end_datetime)

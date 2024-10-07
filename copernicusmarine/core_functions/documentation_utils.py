@@ -1,12 +1,4 @@
-def docstring_parameter(dictionary_variables):
-    def dec(obj):
-        obj.__doc__ = obj.__doc__.format(**dictionary_variables)
-        return obj
-
-    return dec
-
-
-SHARED_HELP = {
+SHARED = {
     "USERNAME_HELP": (
         "If not set, search for environment variable "
         "COPERNICUSMARINE_SERVICE_USERNAME, or else look for configuration files, "
@@ -22,8 +14,8 @@ SHARED_HELP = {
         "(based on standard logging library)."
     ),
     "OVERWRITE_OUTPUT_DATA_HELP": (
-        "If specified and if the file already exists on destination, then it will be "
-        "overwritten instead of creating new one with unique index."
+        "If specified and if the file already exists on destination, then it will"
+        " be overwritten instead of creating new one with unique index."
     ),
     "CREATE_TEMPLATE_HELP": (
         "Option to create a file subset_template.json in your current directory "
@@ -60,7 +52,11 @@ SHARED_HELP = {
     ),
 }
 
-LOGIN_HELP = {
+LOGIN = {
+    "LOGIN_DESCRIPTION_HELP": (
+        "Create a configuration file with your Copernicus Marine credentials.\n \n "
+        "Create a configuration file under the ``$HOME/.copernicusmarine`` directory."
+    ),
     "CONFIGURATION_FILE_DIRECTORY_HELP": (
         "Path to the directory where the configuration file is stored."
     ),
@@ -72,7 +68,16 @@ LOGIN_HELP = {
     ),
 }
 
-DESCRIBE_HELP = {
+DESCRIBE = {
+    "DESCRIBE_DESCRIPTION_HELP": (
+        "Retrieve metadata information from the Copernicus Marine catalogue. \n \n"
+        " This function fetches metadata information from the Copernicus Marine"
+        " catalogue based on specified parameters and options."
+    ),
+    "DESCRIBE_RESPONSE_HELP": (
+        "dict[str, Any]\n"
+        "A dictionary containing the retrieved metadata information."
+    ),
     "INCLUDE_DESCRIPTION_HELP": "Include product description in output.",
     "INCLUDE_DATASETS_HELP": "Include product dataset details in output.",
     "INCLUDE_KEYWORDS_HELP": "Include product keyword details in output.",
@@ -90,7 +95,36 @@ DESCRIBE_HELP = {
     ),
 }
 
-SUBSET_HELP = {
+SUBSET = {
+    "SUBSET_DESCRIPTION_HELP": (
+        "Extracts a subset of data from a specified dataset using given parameters."
+        " \n \n The ``--dataset-id`` is required (can be found via the ``describe`` "
+        "command). The argument values passed individually through the CLI take "
+        "precedence over the values from the ``--motu-api-request`` option, which "
+        "takes precedence over the ones from the ``--request-file`` option."
+    ),
+    "SUBSET_RESPONSE_HELP": (
+        "ResponseSubset \n"
+        "A description of the downloaded data and its destination."
+    ),
+    "OPEN_DESCRIPTION_HELP": (
+        "Load an xarray dataset using 'lazy-loading' mode from a Copernicus Marine "
+        "data source using either the ARCO series protocol.\n \n"
+        "This means that data is only loaded into memory when a computation is called,"
+        " optimizing RAM usage by avoiding immediate loading.\n"
+        "It supports various parameters for customization, such as specifying "
+        "geographical bounds, temporal range, depth range, and more."
+    ),
+    "OPEN_RESPONSE_HELP": ("xarray.Dataset\n The loaded xarray dataset."),
+    "READ_DESCRIPTION_HELP": (
+        "Immediately loads a Pandas DataFrame into memory from a specified dataset.\n "
+        "\n Unlike 'lazy-loading,' the data is loaded as soon as this function is "
+        "executed, which may be preferable when rapid access to the entire dataset "
+        "is required, but may require careful memory management."
+    ),
+    "READ_RESPONSE_HELP": (
+        "pandas.DataFrame \n A DataFrame containing the loaded Copernicus Marine data."
+    ),
     "VARIABLE_HELP": "Specify dataset variable. Can be used multiple times.",
     "MINIMUM_LONGITUDE_HELP": (
         "Minimum longitude for the subset. The value will be reduced to the interval "
@@ -164,7 +198,19 @@ SUBSET_HELP = {
     ),
 }
 
-GET_HELP = {
+GET = {
+    "GET_DESCRIPTION_HELP": (
+        "Download originally produced data files.\n \n  "
+        " The ``--dataset-id`` is required (can be found via the ``describe``"
+        " command). The function fetches the files recursively if a folder "
+        "path is passed as a URL. When provided a dataset ID, all the files "
+        "in the corresponding folder will be downloaded if none of the "
+        "``--filter`` or ``--regex`` options is specified."
+    ),
+    "GET_RESPONSE_HELP": (
+        "ResponseGet \n"
+        "A list of files that were downloaded and some metadata."
+    ),
     "SHOW_OUTPUTNAMES_HELP": (
         "Option to display the names of the output files before download."
     ),
@@ -205,7 +251,7 @@ GET_HELP = {
 }
 
 
-SUBSET_HELP.update(SHARED_HELP)
-GET_HELP.update(SHARED_HELP)
-LOGIN_HELP.update(SHARED_HELP)
-DESCRIBE_HELP.update(SHARED_HELP)
+SUBSET.update(SHARED)
+GET.update(SHARED)
+LOGIN.update(SHARED)
+DESCRIBE.update(SHARED)

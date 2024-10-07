@@ -5,7 +5,7 @@ from typing import List, Optional, Union
 import pandas
 
 from copernicusmarine.catalogue_parser.request_structure import LoadRequest
-from copernicusmarine.core_functions import documentation_utils
+from copernicusmarine.core_functions import decorators, documentation_utils
 from copernicusmarine.core_functions.deprecated import deprecated_python_option
 from copernicusmarine.core_functions.deprecated_options import (
     DEPRECATED_OPTIONS,
@@ -35,7 +35,7 @@ from copernicusmarine.python_interface.load_utils import (
 from copernicusmarine.python_interface.utils import homogenize_datetime
 
 
-@documentation_utils.docstring_parameter(documentation_utils.SUBSET_HELP)
+@decorators.docstring_parameter(documentation_utils.SUBSET)
 @deprecated_python_option(**DEPRECATED_OPTIONS.dict_old_names_to_new_names)
 @log_exception_and_exit
 def read_dataframe(
@@ -61,11 +61,7 @@ def read_dataframe(
     credentials_file: Optional[Union[pathlib.Path, str]] = None,
 ) -> pandas.DataFrame:
     """
-    Immediately loads a Pandas DataFrame into memory from a specified dataset.
-
-    Unlike "lazy-loading," the data is loaded as soon as this function is executed,
-    which may be preferable when rapid access to the entire dataset is required,
-    but may require careful memory management.
+    {READ_DESCRIPTION_HELP}
 
     Parameters
     ----------
@@ -108,8 +104,7 @@ def read_dataframe(
 
     Returns
     -------
-    pandas.DataFrame
-        A DataFrame containing the loaded Copernicus Marine data.
+    {READ_RESPONSE_HELP}
     """  # noqa
 
     start_datetime = homogenize_datetime(start_datetime)

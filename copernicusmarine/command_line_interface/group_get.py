@@ -41,24 +41,21 @@ def cli_get() -> None:
     "get",
     cls=DeprecatedClickOptionsCommand,
     short_help="Download originally produced data files.",
-    help="""
-    Download originally produced data files.
-
-    The ``--dataset-id`` is required (can be found via the "describe" command). The function fetches the files recursively if a folder path is passed as a URL. When provided a dataset ID, all the files in the corresponding folder will be downloaded if none of the ``--filter`` or ``--regex`` options is specified.
-    """,  # noqa
+    help=documentation_utils.GET["GET_DESCRIPTION_HELP"],  # noqa
     epilog="""
     .. code-block:: bash
 
         # Example: Download all files from a dataset
-        copernicusmarine get -i cmems_mod_nws_bgc-pft_myint_7km-3D-diato_P1M-m
-    """,  # noqa
+        copernicusmarine get -i cmems_mod_nws_bgc-pft_myint_7km-3D-diato_P1M-m \n
+    """
+    + documentation_utils.GET["GET_RESPONSE_HELP"],  # noqa
 )
 @click.option(
     "--dataset-id",
     "-i",
     type=str,
     default=None,
-    help=documentation_utils.GET_HELP["DATASET_ID_HELP"],
+    help=documentation_utils.GET["DATASET_ID_HELP"],
 )
 @force_dataset_version_option
 @force_dataset_part_option
@@ -66,45 +63,45 @@ def cli_get() -> None:
     "--username",
     type=str,
     default=None,
-    help=documentation_utils.GET_HELP["USERNAME_HELP"],
+    help=documentation_utils.GET["USERNAME_HELP"],
 )
 @click.option(
     "--password",
     type=str,
     default=None,
-    help=documentation_utils.GET_HELP["PASSWORD_HELP"],
+    help=documentation_utils.GET["PASSWORD_HELP"],
 )
 @click.option(
     "--no-directories",
     "-nd",
     cls=MutuallyExclusiveOption,
     is_flag=True,
-    help=documentation_utils.GET_HELP["NO_DIRECTORIES_HELP"],
+    help=documentation_utils.GET["NO_DIRECTORIES_HELP"],
     default=False,
     mutually_exclusive=["sync"],
 )
 @click.option(
     "--show-outputnames",
     is_flag=True,
-    help=documentation_utils.GET_HELP["SHOW_OUTPUTNAMES_HELP"],
+    help=documentation_utils.GET["SHOW_OUTPUTNAMES_HELP"],
     default=False,
 )
 @click.option(
     "--output-directory",
     "-o",
     type=click.Path(path_type=pathlib.Path),
-    help=documentation_utils.GET_HELP["OUTPUT_DIRECTORY_HELP"],
+    help=documentation_utils.GET["OUTPUT_DIRECTORY_HELP"],
 )
 @click.option(
     "--credentials-file",
     type=click.Path(path_type=pathlib.Path),
-    help=documentation_utils.GET_HELP["CREDENTIALS_FILE_HELP"],
+    help=documentation_utils.GET["CREDENTIALS_FILE_HELP"],
 )
 @click.option(
     "--force-download",
     is_flag=True,
     default=False,
-    help=documentation_utils.GET_HELP["FORCE_DOWNLOAD_HELP"],
+    help=documentation_utils.GET["FORCE_DOWNLOAD_HELP"],
 )
 @click.option(
     OVERWRITE_LONG_OPTION,
@@ -117,52 +114,52 @@ def cli_get() -> None:
     "--service",
     "-s",
     type=str,
-    help=documentation_utils.GET_HELP["SERVICE_HELP"],
+    help=documentation_utils.GET["SERVICE_HELP"],
 )
 @click.option(
     "--create-template",
     type=bool,
     is_flag=True,
     default=False,
-    help=documentation_utils.GET_HELP["CREATE_TEMPLATE_HELP"],
+    help=documentation_utils.GET["CREATE_TEMPLATE_HELP"],
 )
 @click.option(
     "--request-file",
     type=click.Path(exists=True, path_type=pathlib.Path),
-    help=documentation_utils.GET_HELP["REQUEST_FILE_HELP"],
+    help=documentation_utils.GET["REQUEST_FILE_HELP"],
 )
 @click.option(
     "--filter",
     "--filter-with-globbing-pattern",
     type=str,
     default=None,
-    help=documentation_utils.GET_HELP["FILTER_WITH_GLOBBING_PATTERN_HELP"],
+    help=documentation_utils.GET["FILTER_WITH_GLOBBING_PATTERN_HELP"],
 )
 @click.option(
     "--regex",
     "--filter-with-regular-expression",
     type=str,
     default=None,
-    help=documentation_utils.GET_HELP["FILTER_WITH_REGULAR_EXPRESSION_HELP"],
+    help=documentation_utils.GET["FILTER_WITH_REGULAR_EXPRESSION_HELP"],
 )
 @click.option(
     "--file-list",
     type=pathlib.Path,
     default=None,
-    help=documentation_utils.GET_HELP["FILE_LIST_HELP"],
+    help=documentation_utils.GET["FILE_LIST_HELP"],
 )
 @click.option(
     "--create-file-list",
     type=str,
     default=None,
-    help=documentation_utils.GET_HELP["CREATE_FILE_LIST_HELP"],
+    help=documentation_utils.GET["CREATE_FILE_LIST_HELP"],
 )
 @click.option(
     "--sync",
     cls=MutuallyExclusiveOption,
     is_flag=True,
     default=False,
-    help=documentation_utils.GET_HELP["SYNC_HELP"],
+    help=documentation_utils.GET["SYNC_HELP"],
     mutually_exclusive=["no-directories"],
 )
 @click.option(
@@ -170,7 +167,7 @@ def cli_get() -> None:
     cls=MutuallyExclusiveOption,
     is_flag=True,
     default=False,
-    help=documentation_utils.GET_HELP["SYNC_DELETE_HELP"],
+    help=documentation_utils.GET["SYNC_DELETE_HELP"],
     mutually_exclusive=["no-directories"],
 )
 @click.option(
@@ -178,27 +175,27 @@ def cli_get() -> None:
     type=bool,
     is_flag=True,
     default=False,
-    help=documentation_utils.GET_HELP["INDEX_PARTS_HELP"],
+    help=documentation_utils.GET["INDEX_PARTS_HELP"],
 )
 @click.option(
     "--dry-run",
     type=bool,
     is_flag=True,
     default=False,
-    help=documentation_utils.GET_HELP["DRY_RUN_HELP"],
+    help=documentation_utils.GET["DRY_RUN_HELP"],
 )
 @click.option(
     "--max-concurrent-requests",
     type=int,
     default=15,
-    help=documentation_utils.GET_HELP["MAX_CONCURRENT_REQUESTS_HELP"],
+    help=documentation_utils.GET["MAX_CONCURRENT_REQUESTS_HELP"],
 )
 @tqdm_disable_option
 @click.option(
     "--log-level",
     type=click.Choice(["DEBUG", "INFO", "WARN", "ERROR", "CRITICAL", "QUIET"]),
     default="INFO",
-    help=documentation_utils.GET_HELP["LOG_LEVEL_HELP"],
+    help=documentation_utils.GET["LOG_LEVEL_HELP"],
 )
 @click.option(
     "--staging",

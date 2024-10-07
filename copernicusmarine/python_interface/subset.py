@@ -2,7 +2,7 @@ import pathlib
 from datetime import datetime
 from typing import List, Optional, Union
 
-from copernicusmarine.core_functions import documentation_utils
+from copernicusmarine.core_functions import decorators, documentation_utils
 from copernicusmarine.core_functions.deprecated import deprecated_python_option
 from copernicusmarine.core_functions.deprecated_options import (
     DEPRECATED_OPTIONS,
@@ -25,7 +25,7 @@ from copernicusmarine.python_interface.utils import homogenize_datetime
 
 @deprecated_python_option(**DEPRECATED_OPTIONS.dict_old_names_to_new_names)
 @log_exception_and_exit
-@documentation_utils.docstring_parameter(documentation_utils.SUBSET_HELP)
+@decorators.docstring_parameter(documentation_utils.SUBSET)
 def subset(
     dataset_id: Optional[str],
     dataset_version: Optional[str] = None,
@@ -62,7 +62,7 @@ def subset(
     netcdf3_compatible: bool = False,
 ) -> ResponseSubset:
     """
-    Extracts a subset of data from a specified dataset using given parameters.
+    {SUBSET_DESCRIPTION_HELP}
 
     Parameters
     ----------
@@ -127,8 +127,7 @@ def subset(
 
     Returns
     -------
-    ResponseSubset
-        A description of the downloaded data and its destination.
+    {SUBSET_RESPONSE_HELP}
     """  # noqa
     request_file = pathlib.Path(request_file) if request_file else None
     output_directory = (

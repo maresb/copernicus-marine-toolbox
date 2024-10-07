@@ -52,11 +52,7 @@ def cli_subset() -> None:
     "subset",
     cls=DeprecatedClickOptionsCommand,
     short_help="Download subsets of datasets as NetCDF files or Zarr stores.",
-    help="""
-    Download subsets of datasets as NetCDF files or Zarr stores.
-
-    The ``--dataset-id`` is required (can be found via the "describe" command). The argument values passed individually through the CLI take precedence over the values from the ``--motu-api-request`` option, which takes precedence over the ones from the ``--request-file`` option.
-    """,  # noqa
+    help=documentation_utils.SUBSET["SUBSET_DESCRIPTION_HELP"],  # noqa
     epilog="""
     .. code-block:: bash
 
@@ -76,15 +72,16 @@ def cli_subset() -> None:
 
     .. code-block:: bash
 
-        copernicusmarine subset -i cmems_mod_glo_phy-thetao_anfc_0.083deg_PT6H-i -v thetao -t 2022-01-01T00:00:00 -T 2022-12-31T23:59:59 -x -6.17 -X -5.08 -y 35.75 -Y 36.30 -z 0.0 -Z 5.0
-    """,  # noqa
+        copernicusmarine subset -i cmems_mod_glo_phy-thetao_anfc_0.083deg_PT6H-i -v thetao -t 2022-01-01T00:00:00 -T 2022-12-31T23:59:59 -x -6.17 -X -5.08 -y 35.75 -Y 36.30 -z 0.0 -Z 5.0 \n
+    """  # noqa
+    + documentation_utils.SUBSET["SUBSET_RESPONSE_HELP"],
 )
 @click.option(
     "--dataset-id",
     "-i",
     type=str,
     default=None,
-    help=documentation_utils.SUBSET_HELP["DATASET_ID_HELP"],
+    help=documentation_utils.SUBSET["DATASET_ID_HELP"],
 )
 @force_dataset_version_option
 @force_dataset_part_option
@@ -92,111 +89,111 @@ def cli_subset() -> None:
     "--username",
     type=str,
     default=None,
-    help=documentation_utils.SUBSET_HELP["USERNAME_HELP"],
+    help=documentation_utils.SUBSET["USERNAME_HELP"],
 )
 @click.option(
     "--password",
     type=str,
     default=None,
-    help=documentation_utils.SUBSET_HELP["PASSWORD_HELP"],
+    help=documentation_utils.SUBSET["PASSWORD_HELP"],
 )
 @click.option(
     "--variable",
     "-v",
     "variables",
     type=str,
-    help=documentation_utils.SUBSET_HELP["VARIABLE_HELP"],
+    help=documentation_utils.SUBSET["VARIABLE_HELP"],
     multiple=True,
 )
 @click.option(
     "--minimum-longitude",
     "-x",
     type=float,
-    help=documentation_utils.SUBSET_HELP["MINIMUM_LONGITUDE_HELP"],
+    help=documentation_utils.SUBSET["MINIMUM_LONGITUDE_HELP"],
 )
 @click.option(
     "--maximum-longitude",
     "-X",
     type=float,
-    help=documentation_utils.SUBSET_HELP["MAXIMUM_LONGITUDE_HELP"],
+    help=documentation_utils.SUBSET["MAXIMUM_LONGITUDE_HELP"],
 )
 @click.option(
     "--minimum-latitude",
     "-y",
     type=click.FloatRange(min=-90, max=90),
-    help=documentation_utils.SUBSET_HELP["MINIMUM_LATITUDE_HELP"],
+    help=documentation_utils.SUBSET["MINIMUM_LATITUDE_HELP"],
 )
 @click.option(
     "--maximum-latitude",
     "-Y",
     type=click.FloatRange(min=-90, max=90),
-    help=documentation_utils.SUBSET_HELP["MAXIMUM_LATITUDE_HELP"],
+    help=documentation_utils.SUBSET["MAXIMUM_LATITUDE_HELP"],
 )
 @click.option(
     "--minimum-depth",
     "-z",
     type=click.FloatRange(min=0),
-    help=documentation_utils.SUBSET_HELP["MINIMUM_DEPTH_HELP"],
+    help=documentation_utils.SUBSET["MINIMUM_DEPTH_HELP"],
 )
 @click.option(
     "--maximum-depth",
     "-Z",
     type=click.FloatRange(min=0),
-    help=documentation_utils.SUBSET_HELP["MAXIMUM_DEPTH_HELP"],
+    help=documentation_utils.SUBSET["MAXIMUM_DEPTH_HELP"],
 )
 @click.option(
     "--vertical-dimension-output",
     "-V",
     type=click.Choice(DEFAULT_VERTICAL_DIMENSION_OUTPUTS),
     default=DEFAULT_VERTICAL_DIMENSION_OUTPUT,
-    help=documentation_utils.SUBSET_HELP["VERTICAL_DIMENSION_OUTPUT_HELP"],
+    help=documentation_utils.SUBSET["VERTICAL_DIMENSION_OUTPUT_HELP"],
 )
 @click.option(
     "--start-datetime",
     "-t",
     type=str,
-    help=documentation_utils.SUBSET_HELP["START_DATETIME_HELP"],
+    help=documentation_utils.SUBSET["START_DATETIME_HELP"],
 )
 @click.option(
     "--end-datetime",
     "-T",
     type=str,
-    help=documentation_utils.SUBSET_HELP["END_DATETIME_HELP"],
+    help=documentation_utils.SUBSET["END_DATETIME_HELP"],
 )
 @click.option(
     "--coordinates-selection-method",
     type=click.Choice(DEFAULT_COORDINATES_SELECTION_METHODS),
     default=DEFAULT_COORDINATES_SELECTION_METHOD,
-    help=documentation_utils.SUBSET_HELP["COORDINATES_SELECTION_METHOD_HELP"],
+    help=documentation_utils.SUBSET["COORDINATES_SELECTION_METHOD_HELP"],
 )
 @click.option(
     "--output-directory",
     "-o",
     type=click.Path(path_type=pathlib.Path),
-    help=documentation_utils.SUBSET_HELP["OUTPUT_DIRECTORY_HELP"],
+    help=documentation_utils.SUBSET["OUTPUT_DIRECTORY_HELP"],
 )
 @click.option(
     "--credentials-file",
     type=click.Path(path_type=pathlib.Path),
-    help=documentation_utils.SUBSET_HELP["CREDENTIALS_FILE_HELP"],
+    help=documentation_utils.SUBSET["CREDENTIALS_FILE_HELP"],
 )
 @click.option(
     "--output-filename",
     "-f",
     type=str,
-    help=documentation_utils.SUBSET_HELP["OUTPUT_FILENAME_HELP"],
+    help=documentation_utils.SUBSET["OUTPUT_FILENAME_HELP"],
 )
 @click.option(
     "--file-format",
     type=click.Choice(DEFAULT_FILE_FORMATS),
     default=DEFAULT_FILE_FORMAT,
-    help=documentation_utils.SUBSET_HELP["FILE_FORMAT_HELP"],
+    help=documentation_utils.SUBSET["FILE_FORMAT_HELP"],
 )
 @click.option(
     "--force-download",
     is_flag=True,
     default=False,
-    help=documentation_utils.SUBSET_HELP["FORCE_DOWNLOAD_HELP"],
+    help=documentation_utils.SUBSET["FORCE_DOWNLOAD_HELP"],
 )
 @click.option(
     OVERWRITE_LONG_OPTION,
@@ -209,38 +206,38 @@ def cli_subset() -> None:
     "--service",
     "-s",
     type=str,
-    help=documentation_utils.SUBSET_HELP["SERVICE_HELP"],
+    help=documentation_utils.SUBSET["SERVICE_HELP"],
 )
 @click.option(
     "--create-template",
     type=bool,
     is_flag=True,
     default=False,
-    help=documentation_utils.SUBSET_HELP["CREATE_TEMPLATE_HELP"],
+    help=documentation_utils.SUBSET["CREATE_TEMPLATE_HELP"],
 )
 @click.option(
     "--request-file",
     type=click.Path(exists=True, path_type=pathlib.Path),
-    help=documentation_utils.SUBSET_HELP["REQUEST_FILE_HELP"],
+    help=documentation_utils.SUBSET["REQUEST_FILE_HELP"],
 )
 @click.option(
     "--motu-api-request",
     type=str,
-    help=documentation_utils.SUBSET_HELP["MOTU_API_REQUEST_HELP"],
+    help=documentation_utils.SUBSET["MOTU_API_REQUEST_HELP"],
 )
 @click.option(
     "--dry-run",
     type=bool,
     is_flag=True,
     default=False,
-    help=documentation_utils.SUBSET_HELP["DRY_RUN_HELP"],
+    help=documentation_utils.SUBSET["DRY_RUN_HELP"],
 )
 @tqdm_disable_option
 @click.option(
     "--log-level",
     type=click.Choice(["DEBUG", "INFO", "WARN", "ERROR", "CRITICAL", "QUIET"]),
     default="INFO",
-    help=documentation_utils.SUBSET_HELP["LOG_LEVEL_HELP"],
+    help=documentation_utils.SUBSET["LOG_LEVEL_HELP"],
 )
 @click.option(
     "--staging",
@@ -254,19 +251,19 @@ def cli_subset() -> None:
     type=bool,
     default=False,
     is_flag=True,
-    help=documentation_utils.SUBSET_HELP["NETCDF_COMPRESSION_ENABLED_HELP"],
+    help=documentation_utils.SUBSET["NETCDF_COMPRESSION_ENABLED_HELP"],
 )
 @click.option(
     "--netcdf-compression-level",
     type=click.IntRange(0, 9),
-    help=documentation_utils.SUBSET_HELP["NETCDF_COMPRESSION_LEVEL_HELP"],
+    help=documentation_utils.SUBSET["NETCDF_COMPRESSION_LEVEL_HELP"],
 )
 @click.option(
     "--netcdf3-compatible",
     type=bool,
     default=False,
     is_flag=True,
-    help=documentation_utils.SUBSET_HELP["NETCDF_COMPATIBLE_HELP"],
+    help=documentation_utils.SUBSET["NETCDF_COMPATIBLE_HELP"],
 )
 @log_exception_and_exit
 def subset(

@@ -1,14 +1,14 @@
 import pathlib
 from typing import Optional
 
-from copernicusmarine.core_functions import documentation_utils
+from copernicusmarine.core_functions import decorators, documentation_utils
 from copernicusmarine.core_functions.credentials_utils import (
     DEFAULT_CLIENT_BASE_DIRECTORY,
 )
 from copernicusmarine.core_functions.login import login_function
 
 
-@documentation_utils.docstring_parameter(documentation_utils.LOGIN_HELP)
+@decorators.docstring_parameter(documentation_utils.LOGIN)
 def login(
     username: Optional[str] = None,
     password: Optional[str] = None,
@@ -17,7 +17,7 @@ def login(
     skip_if_user_logged_in: bool = False,
 ) -> bool:
     """
-    Create a configuration file with your Copernicus Marine credentials.
+    {LOGIN_DESCRIPTION_HELP}
 
     Parameters
     ----------

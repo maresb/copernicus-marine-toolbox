@@ -24,11 +24,7 @@ def cli_login() -> None:
 @cli_login.command(
     "login",
     short_help="Create a configuration file with your Copernicus Marine credentials.",
-    help="""
-    Create a configuration file with your Copernicus Marine credentials.
-
-    Create a configuration file under the ``$HOME/.copernicusmarine`` directory (overwritable with the ``--credentials-file`` option).
-    """,  # noqa
+    help=documentation_utils.LOGIN["LOGIN_DESCRIPTION_HELP"],  # noqa
     epilog="""
     .. code-block:: bash
 
@@ -48,37 +44,37 @@ def cli_login() -> None:
 @click.option(
     "--username",
     hide_input=False,
-    help=documentation_utils.LOGIN_HELP["USERNAME_HELP"],
+    help=documentation_utils.LOGIN["USERNAME_HELP"],
 )
 @click.option(
     "--password",
     hide_input=True,
-    help=documentation_utils.LOGIN_HELP["PASSWORD_HELP"],
+    help=documentation_utils.LOGIN["PASSWORD_HELP"],
 )
 @click.option(
     "--configuration-file-directory",
     type=click.Path(path_type=pathlib.Path),
     default=DEFAULT_CLIENT_BASE_DIRECTORY,
-    help=documentation_utils.LOGIN_HELP["CONFIGURATION_FILE_DIRECTORY_HELP"],
+    help=documentation_utils.LOGIN["CONFIGURATION_FILE_DIRECTORY_HELP"],
 )
 @click.option(
     "--overwrite-configuration-file",
     "-overwrite",
     is_flag=True,
     default=False,
-    help=documentation_utils.LOGIN_HELP["OVERWRITE_CONFIGURATION_FILE_HELP"],
+    help=documentation_utils.LOGIN["OVERWRITE_CONFIGURATION_FILE_HELP"],
 )
 @click.option(
     "--skip-if-user-logged-in",
     is_flag=True,
     default=False,
-    help=documentation_utils.LOGIN_HELP["SKIP_IF_USER_LOGGED_IN_HELP"],
+    help=documentation_utils.LOGIN["SKIP_IF_USER_LOGGED_IN_HELP"],
 )
 @click.option(
     "--log-level",
     type=click.Choice(["DEBUG", "INFO", "WARN", "ERROR", "CRITICAL", "QUIET"]),
     default="INFO",
-    help=documentation_utils.LOGIN_HELP["LOG_LEVEL_HELP"],
+    help=documentation_utils.LOGIN["LOG_LEVEL_HELP"],
 )
 @log_exception_and_exit
 def login(
