@@ -1,7 +1,7 @@
 import json
 from typing import Any
 
-from copernicusmarine.core_functions import documentation_variables
+from copernicusmarine.core_functions import documentation_utils
 from copernicusmarine.core_functions.deprecated import deprecated_python_option
 from copernicusmarine.core_functions.deprecated_options import (
     DEPRECATED_OPTIONS,
@@ -12,9 +12,7 @@ from copernicusmarine.python_interface.exception_handler import (
 )
 
 
-@documentation_variables.docstring_parameter(
-    documentation_variables.DESCRIBE_HELP
-)
+@documentation_utils.docstring_parameter(documentation_utils.DESCRIBE_HELP)
 @deprecated_python_option(**DEPRECATED_OPTIONS.dict_old_names_to_new_names)
 @log_exception_and_exit
 def describe(

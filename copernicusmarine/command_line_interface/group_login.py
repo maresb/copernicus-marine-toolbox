@@ -7,6 +7,7 @@ import click
 from copernicusmarine.command_line_interface.exception_handler import (
     log_exception_and_exit,
 )
+from copernicusmarine.core_functions import documentation_utils
 from copernicusmarine.core_functions.credentials_utils import (
     DEFAULT_CLIENT_BASE_DIRECTORY,
 )
@@ -47,44 +48,37 @@ def cli_login() -> None:
 @click.option(
     "--username",
     hide_input=False,
-    help="If not set, search for environment variable"
-    + " COPERNICUSMARINE_SERVICE_USERNAME"
-    + ", or else ask for user input.",
+    help=documentation_utils.LOGIN_HELP["USERNAME_HELP"],
 )
 @click.option(
     "--password",
     hide_input=True,
-    help="If not set, search for environment variable"
-    + " COPERNICUSMARINE_SERVICE_PASSWORD"
-    + ", or else ask for user input.",
+    help=documentation_utils.LOGIN_HELP["PASSWORD_HELP"],
 )
 @click.option(
     "--configuration-file-directory",
     type=click.Path(path_type=pathlib.Path),
     default=DEFAULT_CLIENT_BASE_DIRECTORY,
-    help="Path to the directory where the configuration file is stored.",
+    help=documentation_utils.LOGIN_HELP["CONFIGURATION_FILE_DIRECTORY_HELP"],
 )
 @click.option(
     "--overwrite-configuration-file",
     "-overwrite",
     is_flag=True,
     default=False,
-    help="Flag to skip confirmation before overwriting configuration file.",
+    help=documentation_utils.LOGIN_HELP["OVERWRITE_CONFIGURATION_FILE_HELP"],
 )
 @click.option(
     "--skip-if-user-logged-in",
     is_flag=True,
     default=False,
-    help="Flag to skip the logging process if the user is already logged in.",
+    help=documentation_utils.LOGIN_HELP["SKIP_IF_USER_LOGGED_IN_HELP"],
 )
 @click.option(
     "--log-level",
     type=click.Choice(["DEBUG", "INFO", "WARN", "ERROR", "CRITICAL", "QUIET"]),
     default="INFO",
-    help=(
-        "Set the details printed to console by the command "
-        "(based on standard logging library)."
-    ),
+    help=documentation_utils.LOGIN_HELP["LOG_LEVEL_HELP"],
 )
 @log_exception_and_exit
 def login(

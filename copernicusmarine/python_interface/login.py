@@ -1,16 +1,14 @@
 import pathlib
 from typing import Optional
 
-from copernicusmarine.core_functions import documentation_variables
+from copernicusmarine.core_functions import documentation_utils
 from copernicusmarine.core_functions.credentials_utils import (
     DEFAULT_CLIENT_BASE_DIRECTORY,
 )
 from copernicusmarine.core_functions.login import login_function
 
 
-@documentation_variables.docstring_parameter(
-    documentation_variables.LOGIN_HELP
-)
+@documentation_utils.docstring_parameter(documentation_utils.LOGIN_HELP)
 def login(
     username: Optional[str] = None,
     password: Optional[str] = None,

@@ -14,6 +14,7 @@ from copernicusmarine.command_line_interface.utils import (
     force_dataset_version_option,
     tqdm_disable_option,
 )
+from copernicusmarine.core_functions import documentation_utils
 from copernicusmarine.core_functions.deprecated import (
     DeprecatedClickOptionsCommand,
 )
@@ -21,7 +22,6 @@ from copernicusmarine.core_functions.get import (
     create_get_template,
     get_function,
 )
-from copernicusmarine.core_functions.services_utils import CommandType
 from copernicusmarine.core_functions.utils import (
     OVERWRITE_LONG_OPTION,
     OVERWRITE_OPTION_HELP_TEXT,
@@ -58,7 +58,7 @@ def cli_get() -> None:
     "-i",
     type=str,
     default=None,
-    help="The datasetID.",
+    help=documentation_utils.GET_HELP["DATASET_ID_HELP"],
 )
 @force_dataset_version_option
 @force_dataset_part_option
@@ -66,55 +66,45 @@ def cli_get() -> None:
     "--username",
     type=str,
     default=None,
-    help="If not set, search for environment variable"
-    + " COPERNICUSMARINE_SERVICE_USERNAME"
-    + ", or else look for configuration files, or else ask for user input.",
+    help=documentation_utils.GET_HELP["USERNAME_HELP"],
 )
 @click.option(
     "--password",
     type=str,
     default=None,
-    help="If not set, search for environment variable"
-    + " COPERNICUSMARINE_SERVICE_PASSWORD"
-    + ", or else look for configuration files, or else ask for user input.",
+    help=documentation_utils.GET_HELP["PASSWORD_HELP"],
 )
 @click.option(
     "--no-directories",
     "-nd",
     cls=MutuallyExclusiveOption,
     is_flag=True,
-    help="Option to not recreate folder hierarchy in ouput directory.",
+    help=documentation_utils.GET_HELP["NO_DIRECTORIES_HELP"],
     default=False,
     mutually_exclusive=["sync"],
 )
 @click.option(
     "--show-outputnames",
     is_flag=True,
-    help="Option to display the names of the"
-    + " output files before download.",
+    help=documentation_utils.GET_HELP["SHOW_OUTPUTNAMES_HELP"],
     default=False,
 )
 @click.option(
     "--output-directory",
     "-o",
     type=click.Path(path_type=pathlib.Path),
-    help="The destination directory for the downloaded files."
-    + " Default is the current directory.",
+    help=documentation_utils.GET_HELP["OUTPUT_DIRECTORY_HELP"],
 )
 @click.option(
     "--credentials-file",
     type=click.Path(path_type=pathlib.Path),
-    help=(
-        "Path to a credentials file if not in its default directory. "
-        "Accepts .copernicusmarine-credentials / .netrc or _netrc / "
-        "motuclient-python.ini files."
-    ),
+    help=documentation_utils.GET_HELP["CREDENTIALS_FILE_HELP"],
 )
 @click.option(
     "--force-download",
     is_flag=True,
     default=False,
-    help="Flag to skip confirmation before download.",
+    help=documentation_utils.GET_HELP["FORCE_DOWNLOAD_HELP"],
 )
 @click.option(
     OVERWRITE_LONG_OPTION,
@@ -127,72 +117,52 @@ def cli_get() -> None:
     "--service",
     "-s",
     type=str,
-    help=(
-        "Force download through one of the available services "
-        f"using the service name among {CommandType.GET.service_names()} "
-        f"or its short name among {CommandType.GET.service_short_names()}."
-    ),
+    help=documentation_utils.GET_HELP["SERVICE_HELP"],
 )
 @click.option(
     "--create-template",
     type=bool,
     is_flag=True,
     default=False,
-    help="Option to create a file get_template.json in your current directory "
-    "containing CLI arguments. If specified, no other action will be performed.",
+    help=documentation_utils.GET_HELP["CREATE_TEMPLATE_HELP"],
 )
 @click.option(
     "--request-file",
     type=click.Path(exists=True, path_type=pathlib.Path),
-    help="Option to pass a file containing CLI arguments. "
-    "The file MUST follow the structure of dataclass 'GetRequest'."
-    " For more information please refer to the README.",
+    help=documentation_utils.GET_HELP["REQUEST_FILE_HELP"],
 )
 @click.option(
     "--filter",
     "--filter-with-globbing-pattern",
     type=str,
     default=None,
-    help="A pattern that must match the absolute paths of "
-    "the files to download.",
+    help=documentation_utils.GET_HELP["FILTER_WITH_GLOBBING_PATTERN_HELP"],
 )
 @click.option(
     "--regex",
     "--filter-with-regular-expression",
     type=str,
     default=None,
-    help="The regular expression that must match the absolute paths of "
-    "the files to download.",
+    help=documentation_utils.GET_HELP["FILTER_WITH_REGULAR_EXPRESSION_HELP"],
 )
 @click.option(
     "--file-list",
     type=pathlib.Path,
     default=None,
-    help="Path to a .txt file containing a list of file paths,"
-    " line by line, that will be downloaded directly."
-    " These files must be from the specified dataset using the --dataset-id."
-    " If no files can be found, the Toolbox will list all"
-    " files on the remote server and attempt to find a match.",
+    help=documentation_utils.GET_HELP["FILE_LIST_HELP"],
 )
 @click.option(
     "--create-file-list",
     type=str,
     default=None,
-    help="Option to only create a file containing "
-    "the names of the targeted files instead of downloading them. "
-    "It writes the file in the directory specified with the "
-    "--output-directory option (default to current directory). "
-    "The file name specified should end with '.txt' or '.csv' "
-    "If specified, no other action will be performed. "
-    "Please find more information in the README.",
+    help=documentation_utils.GET_HELP["CREATE_FILE_LIST_HELP"],
 )
 @click.option(
     "--sync",
     cls=MutuallyExclusiveOption,
     is_flag=True,
     default=False,
-    help="Option to synchronize the local directory with "
-    "the remote directory. See the documentation for more details.",
+    help=documentation_utils.GET_HELP["SYNC_HELP"],
     mutually_exclusive=["no-directories"],
 )
 @click.option(
@@ -200,8 +170,7 @@ def cli_get() -> None:
     cls=MutuallyExclusiveOption,
     is_flag=True,
     default=False,
-    help="Option to delete local files that are not present on "
-    "the remote server while applying sync.",
+    help=documentation_utils.GET_HELP["SYNC_DELETE_HELP"],
     mutually_exclusive=["no-directories"],
 )
 @click.option(
@@ -209,32 +178,27 @@ def cli_get() -> None:
     type=bool,
     is_flag=True,
     default=False,
-    help="Option to get the index files of an INSITU dataset. Temporary option.",
+    help=documentation_utils.GET_HELP["INDEX_PARTS_HELP"],
 )
 @click.option(
     "--dry-run",
     type=bool,
     is_flag=True,
     default=False,
-    help="Runs query without downloading data.",
+    help=documentation_utils.GET_HELP["DRY_RUN_HELP"],
 )
 @click.option(
     "--max-concurrent-requests",
     type=int,
     default=15,
-    help="Maximum number of concurrent requests. "
-    "Default 15. The get command uses a thread "
-    "pool executor to manage concurrent requests.",
+    help=documentation_utils.GET_HELP["MAX_CONCURRENT_REQUESTS_HELP"],
 )
 @tqdm_disable_option
 @click.option(
     "--log-level",
     type=click.Choice(["DEBUG", "INFO", "WARN", "ERROR", "CRITICAL", "QUIET"]),
     default="INFO",
-    help=(
-        "Set the details printed to console by the command "
-        "(based on standard logging library)."
-    ),
+    help=documentation_utils.GET_HELP["LOG_LEVEL_HELP"],
 )
 @click.option(
     "--staging",

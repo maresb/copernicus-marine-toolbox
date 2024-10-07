@@ -5,7 +5,7 @@ from typing import List, Optional, Union
 import pandas
 
 from copernicusmarine.catalogue_parser.request_structure import LoadRequest
-from copernicusmarine.core_functions import documentation_variables
+from copernicusmarine.core_functions import documentation_utils
 from copernicusmarine.core_functions.deprecated import deprecated_python_option
 from copernicusmarine.core_functions.deprecated_options import (
     DEPRECATED_OPTIONS,
@@ -35,9 +35,7 @@ from copernicusmarine.python_interface.load_utils import (
 from copernicusmarine.python_interface.utils import homogenize_datetime
 
 
-@documentation_variables.docstring_parameter(
-    documentation_variables.SUBSET_HELP
-)
+@documentation_utils.docstring_parameter(documentation_utils.SUBSET_HELP)
 @deprecated_python_option(**DEPRECATED_OPTIONS.dict_old_names_to_new_names)
 @log_exception_and_exit
 def read_dataframe(
