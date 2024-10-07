@@ -5,6 +5,7 @@ from typing import List, Optional, Union
 import xarray
 
 from copernicusmarine.catalogue_parser.request_structure import LoadRequest
+from copernicusmarine.core_functions import documentation_variables
 from copernicusmarine.core_functions.deprecated import deprecated_python_option
 from copernicusmarine.core_functions.deprecated_options import (
     DEPRECATED_OPTIONS,
@@ -34,6 +35,9 @@ from copernicusmarine.python_interface.load_utils import (
 from copernicusmarine.python_interface.utils import homogenize_datetime
 
 
+@documentation_variables.docstring_parameter(
+    documentation_variables.SUBSET_HELP
+)
 @deprecated_python_option(**DEPRECATED_OPTIONS.dict_old_names_to_new_names)
 @log_exception_and_exit
 def open_dataset(
@@ -67,42 +71,41 @@ def open_dataset(
     Parameters
     ----------
     dataset_id : str
-        The ID of the dataset. `dataset_id` is mandatory.
+        {DATASET_ID_HELP}
     dataset_version : str, optional
-        Force the use of a specific dataset version.
+        {DATASET_VERSION_HELP}
     dataset_part : str, optional
-        Force the use of a specific dataset part.
+        {DATASET_PART_HELP}
     username : str, optional
-        Username for authentication, if required.
+        {USERNAME_HELP}
     password : str, optional
-        Password for authentication, if required.
+        {PASSWORD_HELP}
     variables : List[str], optional
-        List of variable names to be loaded from the dataset.
+        {VARIABLE_HELP}
     minimum_longitude : float, optional
-        The minimum longitude for subsetting the data.
+        {MINIMUM_LONGITUDE_HELP}
     maximum_longitude : float, optional
-        The maximum longitude for subsetting the data.
+        {MAXIMUM_LONGITUDE_HELP}
     minimum_latitude : float, optional
-        The minimum latitude for subsetting the data.
+        {MINIMUM_LATITUDE_HELP}
     maximum_latitude : float, optional
-        The maximum latitude for subsetting the data.
+        {MAXIMUM_LATITUDE_HELP}
     minimum_depth : float, optional
-        The minimum depth for subsetting the data.
+        {MINIMUM_DEPTH_HELP}
     maximum_depth : float, optional
-        The maximum depth for subsetting the data.
+        {MAXIMUM_DEPTH_HELP}
     coordinates_selection_method : str, optional
-        The method in which the coordinates will be retrieved. If 'strict', the retrieved selection will be inside the requested interval. If 'strict', the retrieved selection will be inside the requested interval and an error will raise if there doesn't exist the values. If 'nearest', the returned interval extremes will be the closest to what has been asked for. A warning will be displayed if outside of bounds. If 'outisde', the extremes will be taken to contain all the requested interval. A warning will also be displayed if the subset is outside of the dataset bounds.
+        {COORDINATES_SELECTION_METHOD_HELP}
     vertical_dimension_output : str, optional
-        Consolidate the vertical dimension (the z-axis) as requested: 'depth' with descending positive values.
-        'elevation' with ascending positive values. Default is 'depth'.
+        {VERTICAL_DIMENSION_OUTPUT_HELP}
     start_datetime : datetime, optional
-        The start datetime for temporal subsetting.
+        {START_DATETIME_HELP}
     end_datetime : datetime, optional
-        The end datetime for temporal subsetting.
+        {END_DATETIME_HELP}
     service : str, optional
-        Force the use of a specific service (ARCO geo series or time series).
+        {SERVICE_HELP}
     credentials_file : Union[pathlib.Path, str], optional
-        Path to a file containing authentication credentials.
+        {CREDENTIALS_FILE_HELP}
 
     Returns
     -------

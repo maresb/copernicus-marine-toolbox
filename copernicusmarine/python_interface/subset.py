@@ -125,7 +125,7 @@ def subset(
     netcdf_compression_level : int, optional
         {NETCDF_COMPRESSION_LEVEL_HELP}
     netcdf3_compatible : bool, optional
-        {NETCDF3_COMPATIBLE_HELP}
+        {NETCDF_COMPATIBLE_HELP}
 
     Returns
     -------

@@ -1,6 +1,7 @@
 import json
 from typing import Any
 
+from copernicusmarine.core_functions import documentation_variables
 from copernicusmarine.core_functions.deprecated import deprecated_python_option
 from copernicusmarine.core_functions.deprecated_options import (
     DEPRECATED_OPTIONS,
@@ -11,6 +12,9 @@ from copernicusmarine.python_interface.exception_handler import (
 )
 
 
+@documentation_variables.docstring_parameter(
+    documentation_variables.DESCRIBE_HELP
+)
 @deprecated_python_option(**DEPRECATED_OPTIONS.dict_old_names_to_new_names)
 @log_exception_and_exit
 def describe(
@@ -33,22 +37,21 @@ def describe(
     Parameters
     ----------
     include_description : bool, optional
-        Whether to include description for each product. Defaults to False.
+        {INCLUDE_DESCRIPTION_HELP}
     include_datasets : bool, optional
-        Whether to include dataset information. Defaults to False.
+        {INCLUDE_DATASETS_HELP}
     include_keywords : bool, optional
-        Whether to include keywords for each product. Defaults to False.
+        {INCLUDE_KEYWORDS_HELP}
     include_versions : bool, optional
-        Whether to include all versions of each dataset. Defaults to False.
+        {INCLUDE_VERSIONS_HELP}
     include_all : bool, optional
-        Whether to include all metadata information. Defaults to False.
+        {INCLUDE_ALL_HELP}
     contains : list[str], optional
-        List of strings to filter items containing these values. Defaults to [].
+        {CONTAINS_HELP}
     max_concurrent_requests : int, optional
-        Maximum number of concurrent requests. Defaults to 15. The describe command
-        uses a thread pool executor to manage concurrent requests.
+        {MAX_CONCURRENT_REQUESTS_HELP}
     disable_progress_bar : bool, optional
-        Whether to disable the progress bar. Defaults to False.
+        {DISABLE_PROGRESS_BAR_HELP}
 
     Returns
     -------

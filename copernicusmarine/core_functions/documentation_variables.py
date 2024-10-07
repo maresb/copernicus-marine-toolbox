@@ -1,6 +1,5 @@
 def docstring_parameter(dictionary_variables):
     def dec(obj):
-        print(dictionary_variables)
         obj.__doc__ = obj.__doc__.format(**dictionary_variables)
         return obj
 
@@ -160,60 +159,8 @@ SUBSET_HELP = {
         "Specify a compression level to apply on the NetCDF output file. A value of 0 "
         "means no compression, and 9 is the highest level of compression available."
     ),
-    "NETCDF3_COMPATIBLE_HELP": (
+    "NETCDF_COMPATIBLE_HELP": (
         "Enable downloading the dataset in a netCDF 3 compatible format."
-    ),
-    # Shared heklp a partir d'aquí
-    "USERNAME_HELP": (
-        "If not set, search for environment variable "
-        "COPERNICUSMARINE_SERVICE_USERNAME, or else look for configuration files, "
-        "or else ask for user input."
-    ),
-    "PASSWORD_HELP": (
-        "If not set, search for environment variable "
-        "COPERNICUSMARINE_SERVICE_PASSWORD, or else look for configuration files, "
-        "or else ask for user input."
-    ),
-    "LOG_LEVEL_HELP": (
-        "Set the details printed to console by the command "
-        "(based on standard logging library)."
-    ),
-    "OVERWRITE_OUTPUT_DATA_HELP": (
-        "If specified and if the file already exists on destination, then it will be "
-        "overwritten instead of creating new one with unique index."
-    ),
-    "CREATE_TEMPLATE_HELP": (
-        "Option to create a file subset_template.json in your current directory "
-        "containing CLI arguments. If specified, no other action will be performed."
-    ),
-    "REQUEST_FILE_HELP": (
-        "Option to pass a file containing CLI arguments. The file MUST follow the "
-        "structure of dataclass ‘SubsetRequest’. For more information please refer "
-        "to the README."
-    ),
-    "CREDENTIALS_FILE_HELP": (
-        "Path to a credentials file if not in its default directory. Accepts "
-        ".copernicusmarine-credentials / .netrc or _netrc / motuclient-python.ini "
-        "files."
-    ),
-    "SERVICE_HELP": (
-        "Force download through one of the available services using the service name "
-        "among [‘arco-geo-series’, ‘arco-time-series’, ‘omi-arco’, ‘static-arco’] or "
-        "its short name among [‘geoseries’, ‘timeseries’, ‘omi-arco’, ‘static-arco’]."
-    ),
-    "DATASET_VERSION_HELP": "Force the selection of a specific dataset version.",
-    "DATASET_PART_HELP": "Force the selection of a specific dataset part.",
-    "DATASET_ID_HELP": "The datasetID.",
-    "DISABLE_PROGRESS_BAR_HELP": "Flag to hide progress bar.",
-    "FORCE_DOWNLOAD_HELP": "Flag to skip confirmation before download.",
-    "DRY_RUN_HELP": "Runs query without downloading data.",
-    "MAX_CONCURRENT_REQUESTS_HELP": (
-        "Maximum number of concurrent requests. Default 15. The command uses a thread "
-        "pool executor to manage concurrent requests."
-    ),
-    "OUTPUT_DIRECTORY_HELP": (
-        "The destination folder for the downloaded files. Default is the current "
-        "directory."
     ),
 }
 
@@ -252,4 +199,13 @@ GET_HELP = {
     "INDEX_PARTS_HELP": (
         "Option to get the index files of an INSITU dataset. Temporary option."
     ),
+    "NO_DIRECTORIES_HELP": (
+        "If True, downloaded files will not be organized into directories."
+    ),
 }
+
+
+SUBSET_HELP.update(SHARED_HELP)
+GET_HELP.update(SHARED_HELP)
+LOGIN_HELP.update(SHARED_HELP)
+DESCRIBE_HELP.update(SHARED_HELP)

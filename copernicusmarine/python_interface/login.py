@@ -1,12 +1,16 @@
 import pathlib
 from typing import Optional
 
+from copernicusmarine.core_functions import documentation_variables
 from copernicusmarine.core_functions.credentials_utils import (
     DEFAULT_CLIENT_BASE_DIRECTORY,
 )
 from copernicusmarine.core_functions.login import login_function
 
 
+@documentation_variables.docstring_parameter(
+    documentation_variables.LOGIN_HELP
+)
 def login(
     username: Optional[str] = None,
     password: Optional[str] = None,
@@ -20,17 +24,15 @@ def login(
     Parameters
     ----------
     username : str, optional
-        If not set, searches for the environment variable `COPERNICUSMARINE_SERVICE_USERNAME`,
-        or else asks for user input.
+        {USERNAME_HELP}
     password : str, optional
-        If not set, searches for the environment variable `COPERNICUSMARINE_SERVICE_PASSWORD`,
-        or else asks for user input.
+        {PASSWORD_HELP}
     configuration_file_directory : Union[pathlib.Path, str]
-        Path to the directory where the configuration file is stored.
+        {CONFIGURATION_FILE_DIRECTORY_HELP}
     overwrite_configuration_file : bool
-        Flag to skip confirmation before overwriting the configuration file.
+        {OVERWRITE_CONFIGURATION_FILE_HELP}
     skip_if_user_logged_in : bool
-        Flag to skip the logging process if the user is already logged in.
+        {SKIP_IF_USER_LOGGED_IN_HELP}
     """  # noqa
     return login_function(
         username=username,
