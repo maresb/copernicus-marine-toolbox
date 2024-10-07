@@ -105,7 +105,7 @@ def subset(
     maximum_depth : float, optional
         {MAXIMUM_DEPTH_HELP}
     vertical_dimension_output : str, optional
-        {VERTICAL_DIMENSION_OUTPUT_HELP
+        {VERTICAL_DIMENSION_OUTPUT_HELP}
     start_datetime : datetime, optional
         {START_DATETIME_HELP}
     end_datetime : datetime, optional
