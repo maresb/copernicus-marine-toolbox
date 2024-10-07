@@ -13,9 +13,9 @@ from copernicusmarine.python_interface.exception_handler import (
 )
 
 
-@documentation_utils.docstring_parameter(documentation_utils.GET_HELP)
 @deprecated_python_option(**DEPRECATED_OPTIONS.dict_old_names_to_new_names)
 @log_exception_and_exit
+@documentation_utils.docstring_parameter(documentation_utils.GET_HELP)
 def get(
     dataset_id: Optional[str],
     dataset_version: Optional[str] = None,
