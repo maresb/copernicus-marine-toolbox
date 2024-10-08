@@ -32,12 +32,7 @@ from copernicusmarine.core_functions.subset import (
     create_subset_template,
     subset_function,
 )
-from copernicusmarine.core_functions.utils import (
-    OVERWRITE_LONG_OPTION,
-    OVERWRITE_OPTION_HELP_TEXT,
-    OVERWRITE_SHORT_OPTION,
-    datetime_parser,
-)
+from copernicusmarine.core_functions.utils import datetime_parser
 
 logger = logging.getLogger("copernicusmarine")
 blank_logger = logging.getLogger("copernicusmarine_blank_logger")
@@ -196,11 +191,11 @@ def cli_subset() -> None:
     help=documentation_utils.SUBSET["FORCE_DOWNLOAD_HELP"],
 )
 @click.option(
-    OVERWRITE_LONG_OPTION,
-    OVERWRITE_SHORT_OPTION,
+    documentation_utils.SUBSET["OVERWRITE_LONG_OPTION"],
+    documentation_utils.SUBSET["OVERWRITE_SHORT_OPTION"],
     is_flag=True,
     default=False,
-    help=OVERWRITE_OPTION_HELP_TEXT,
+    help=documentation_utils.SUBSET["OVERWRITE_OPTION_HELP_TEXT"],
 )
 @click.option(
     "--service",

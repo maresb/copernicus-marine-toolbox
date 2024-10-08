@@ -22,11 +22,6 @@ from copernicusmarine.core_functions.get import (
     create_get_template,
     get_function,
 )
-from copernicusmarine.core_functions.utils import (
-    OVERWRITE_LONG_OPTION,
-    OVERWRITE_OPTION_HELP_TEXT,
-    OVERWRITE_SHORT_OPTION,
-)
 
 logger = logging.getLogger("copernicusmarine")
 blank_logger = logging.getLogger("copernicusmarine_blank_logger")
@@ -104,11 +99,11 @@ def cli_get() -> None:
     help=documentation_utils.GET["FORCE_DOWNLOAD_HELP"],
 )
 @click.option(
-    OVERWRITE_LONG_OPTION,
-    OVERWRITE_SHORT_OPTION,
+    documentation_utils.GET["OVERWRITE_LONG_OPTION"],
+    documentation_utils.GET["OVERWRITE_SHORT_OPTION"],
     is_flag=True,
     default=False,
-    help=OVERWRITE_OPTION_HELP_TEXT,
+    help=documentation_utils.GET["OVERWRITE_OPTION_HELP_TEXT"],
 )
 @click.option(
     "--service",
