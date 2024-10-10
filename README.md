@@ -4,7 +4,7 @@ This unofficial fork is published by @maresb, not Mercator Ocean.
 
 Published to PyPI as `maresb-copernicusmarine-unpin-numpy`.
 
-[!WARNING]
+> [!WARNING]
 I will probably delete the PyPI package some time after NumPy v2 is supported in order to avoid noise in PyPI.
 
 The motivation for this fork is explained [here](https://github.com/mercator-ocean/copernicus-marine-toolbox/issues/159).
