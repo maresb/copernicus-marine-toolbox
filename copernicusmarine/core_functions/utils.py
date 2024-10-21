@@ -4,7 +4,6 @@ import os
 import pathlib
 import re
 from datetime import datetime
-from importlib.metadata import version
 from typing import (
     Any,
     Awaitable,
@@ -25,7 +24,7 @@ import pandas as pd
 import xarray
 from requests import PreparedRequest
 
-from copernicusmarine import __version__ as copernicusmarine_version
+from copernicusmarine._version import __version__ as copernicusmarine_version
 from copernicusmarine.core_functions.environment_variables import (
     COPERNICUSMARINE_CACHE_DIRECTORY,
 )
@@ -156,7 +155,7 @@ def convert_datetime64_to_netcdf_timestamp(
 def add_copernicusmarine_version_in_dataset_attributes(
     dataset: xarray.Dataset,
 ) -> xarray.Dataset:
-    dataset.attrs["copernicusmarine_version"] = version("copernicusmarine")
+    dataset.attrs["copernicusmarine_version"] = copernicusmarine_version
     return dataset
 
 

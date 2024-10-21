@@ -5,7 +5,6 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from datetime import timedelta
 from enum import Enum
-from importlib.metadata import version as package_version
 from itertools import groupby
 from typing import Any, Dict, Iterator, List, Optional, Tuple, Union
 
@@ -15,6 +14,7 @@ from aiohttp import ContentTypeError, ServerDisconnectedError
 from cachier.core import cachier
 from tqdm import tqdm
 
+from copernicusmarine._version import __version__ as package_version
 from copernicusmarine.aioretry import RetryInfo, RetryPolicyStrategy, retry
 from copernicusmarine.command_line_interface.exception_handler import (
     log_exception_debug,
@@ -884,7 +884,7 @@ def parse_catalogue(
     try:
         catalog = _parse_catalogue(
             ignore_cache=no_metadata_cache,
-            _versions=package_version("copernicusmarine"),
+            _versions=package_version,
             disable_progress_bar=disable_progress_bar,
             staging=staging,
         )
@@ -897,7 +897,7 @@ def parse_catalogue(
         )
         catalog = _parse_catalogue(
             ignore_cache=True,
-            _versions=package_version("copernicusmarine"),
+            _versions=package_version,
             disable_progress_bar=disable_progress_bar,
             staging=staging,
         )
